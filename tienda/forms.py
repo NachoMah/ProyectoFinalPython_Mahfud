@@ -15,3 +15,6 @@ class EmpleadoForm(forms.ModelForm):
     class Meta:
         model = Empleado
         fields = ['nombre', 'puesto', 'dni']
+
+class BuscarProductoFormulario(forms.Form):
+    nombre = forms.CharField(label = "Nombre del producto", max_length=100)

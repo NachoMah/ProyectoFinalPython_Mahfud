@@ -4,12 +4,13 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Bienvenido a la Tienda</h1>
-    <p>Desde acá podés acceder a:</p>
+    <h1>Bienvenido a TechShop</h1>
+    <p>Desde acá vas a podés acceder a:</p>
     <ul>
         <li><a href="{% url 'crear_cliente' %}">Registrar Cliente</a></li>
         <li><a href="{% url 'crear_producto' %}">Registrar Producto</a></li>
         <li><a href="{% url 'crear_empleado' %}">Registrar Empleado</a></li>
+        <li><a href="{% url 'buscar_producto' %}">Buscar Producto</a></li>
     </ul>
 </div>
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'tienda/padre.html' %}
+{% block title %}Buscar Producto{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Buscar Producto</h2>
+
+    <form method="get" action="{% url 'buscar_producto' %}">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if resultados %}
+        <h3 class="mt-4">Resultados:</h3>
+        <ul>
+            {% for producto in resultados %}
+                <li>{{ producto.nombre }} - ${{ producto.precio }}</li>
+            {% endfor %}
+        </ul>
+    {% elif resultados is not none %}
+        <p>No se encontraron productos con ese nombre.</p>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al inicio</a>
+        <a href="{% url 'buscar_producto' %}" class="btn btn-outline-secondary">Nueva búsqueda</a>
+    </div>
+</div>
+{% endblock %}
