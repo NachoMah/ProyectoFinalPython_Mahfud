@@ -1,5 +1,7 @@
 {% extends 'tienda/padre.html' %}
+
 {% block title %}Buscar Producto{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <h2>Buscar Producto</h2>
@@ -16,7 +18,7 @@
                 <li>{{ producto.nombre }} - ${{ producto.precio }}</li>
             {% endfor %}
         </ul>
-    {% elif resultados is not none %}
+    {% elif busqueda_realizada %}
         <p>No se encontraron productos con ese nombre.</p>
     {% endif %}
 
