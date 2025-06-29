@@ -1,16 +1,23 @@
 {% extends 'tienda/padre.html' %}
+{% load static %}
 
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1>Bienvenido a TechShop</h1>
-    <p>Desde acá vas a podés acceder a:</p>
-    <ul>
-        <li><a href="{% url 'crear_cliente' %}">Registrar Cliente</a></li>
-        <li><a href="{% url 'crear_producto' %}">Registrar Producto</a></li>
-        <li><a href="{% url 'crear_empleado' %}">Registrar Empleado</a></li>
-        <li><a href="{% url 'buscar_producto' %}">Buscar Producto</a></li>
-    </ul>
+
+<!-- Imagen full ancho fuera del container -->
+
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Bienvenido a <span class="text-primary">TechShop</span></h1>
+    <p class="lead">Aquí podrás gestionar todos los datos de tu tienda.</p>
+    <img src="{% static 'images/tech_banner.jpg' %}" class="img-fluid w-100 mb-4" alt="Imagen de bienvenida">
+    <p class="lead">¿Qué querés hacer?</p>
+    <div class="d-grid gap-3 col-6 mx-auto mt-4">
+        <a href="{% url 'crear_cliente' %}" class="btn btn-outline-primary btn-lg">Registrar Cliente</a>
+        <a href="{% url 'crear_producto' %}" class="btn btn-outline-success btn-lg">Registrar Producto</a>
+        <a href="{% url 'crear_empleado' %}" class="btn btn-outline-warning btn-lg">Registrar Empleado</a>
+        <a href="{% url 'buscar_producto' %}" class="btn btn-outline-info btn-lg">Buscar Producto</a>
+    </div>
 </div>
+
 {% endblock %}
