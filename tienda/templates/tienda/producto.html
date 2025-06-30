@@ -1,0 +1,12 @@
+{% extends 'tienda/padre.html' %}
+
+{% block title %}Crear Producto{% endblock %}
+
+{% block content %}
+<h2>Agregar un producto: </h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}
