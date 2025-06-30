@@ -38,3 +38,11 @@ Las funcionalidades que ofrece esta pre-entrega son:
 3. Instalar dependencias con: `pip install -r requirements.txt`  
 4. Abrir la terminal y ejecutar: `python manage.py runserver`  
 5. Acceder a: `http://localhost:8000/`
+
+## Acceso al panel de administración
+
+Para ingresar al panel de administración de Django:
+
+1. Ejecutá el servidor con `python manage.py runserver`.
+2. Ingresá a `http://localhost:8000/admin/` en tu navegador.
+3. Si aún no creaste un superusuario, ejecutá:
