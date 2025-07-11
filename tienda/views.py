@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, UserRegisterForm
+from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -14,17 +14,16 @@ def detalle_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
     return render(request, 'tienda/detalle_publicacion.html', {'publicacion': publicacion})
 
-def signup_view(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+def registro_usuario(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  
-            messages.success(request, "Registro exitoso. ¡Bienvenido!")
+            login(request, user)  # Lo loguea automáticamente
             return redirect('inicio')
     else:
-        form = UserRegisterForm()
-    return render(request, 'tienda/signup.html', {'form': form})
+        form = RegistroUsuarioForm()
+    return render(request, 'tienda/registro.html', {'form': form})
 
 def login_view(request):
     if request.method == "POST":
