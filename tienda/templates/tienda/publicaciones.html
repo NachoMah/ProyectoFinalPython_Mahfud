@@ -14,7 +14,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ publicacion.titulo }}</h5>
                             <p class="card-text">{{ publicacion.subtitulo }}</p>
-                            <a href="#" class="btn btn-primary">Leer más</a>
+                            <!-- Aquí agregamos el enlace correcto -->
+                            <a href="{% url 'detalle_publicacion' publicacion.pk %}" class="btn btn-primary">Leer más</a>
                         </div>
                         <div class="card-footer text-muted">
                             {{ publicacion.fecha }}

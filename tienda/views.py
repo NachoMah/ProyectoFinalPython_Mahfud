@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario
 from .models import Producto, Publicacion
 
 def listar_publicaciones(request):
     publicaciones = Publicacion.objects.all().order_by('-fecha')
     return render(request, 'tienda/publicaciones.html', {'publicaciones': publicaciones})
-    
+
+def detalle_publicacion(request, pk):
+    publicacion = get_object_or_404(Publicacion, pk=pk)
+    return render(request, 'tienda/detalle_publicacion.html', {'publicacion': publicacion})
 
 #Vistas tercer entregable:
 

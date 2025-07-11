@@ -1,0 +1,15 @@
+{% extends 'tienda/padre.html' %}
+
+{% block title %}{{ publicacion.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ publicacion.titulo }}</h2>
+    <p class="text-muted">{{ publicacion.fecha_publicacion }}</p>
+    <img src="{{ publicacion.imagen.url }}" class="img-fluid mb-4" alt="{{ publicacion.titulo }}">
+    <div>
+        {{ publicacion.contenido|safe }}
+    </div>
+    <a href="{% url 'listar_publicaciones' %}" class="btn btn-secondary mt-4">Volver a publicaciones</a>
+</div>
+{% endblock %}
