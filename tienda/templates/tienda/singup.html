@@ -1,0 +1,13 @@
+{% extends 'tienda/padre.html' %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Registro de usuario</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+</div>
+{% endblock %}

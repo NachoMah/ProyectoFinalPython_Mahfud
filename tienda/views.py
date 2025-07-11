@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario
+from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, UserRegisterForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .models import Producto, Publicacion
 
 def listar_publicaciones(request):
@@ -9,6 +13,41 @@ def listar_publicaciones(request):
 def detalle_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
     return render(request, 'tienda/detalle_publicacion.html', {'publicacion': publicacion})
+
+def signup_view(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  
+            messages.success(request, "Registro exitoso. ¡Bienvenido!")
+            return redirect('inicio')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'tienda/signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "Has iniciado sesión correctamente.")
+            return redirect('inicio')
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'tienda/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, "Has cerrado sesión.")
+    return redirect('inicio')
+
+@login_required
+def perfil_view(request):
+    return render(request, 'tienda/perfil.html')
 
 #Vistas tercer entregable:
 
