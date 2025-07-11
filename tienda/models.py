@@ -1,4 +1,14 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+
+class Publicacion(models.Model):
+    titulo = models.CharField(max_length=200)
+    subtitulo = models.CharField(max_length=200)
+    contenido = RichTextField()
+    imagen = models.ImageField(upload_to='publicaciones/')
+    fecha = models.DateField(auto_now_add=True)
+
+#Modelos tercer entregable
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
