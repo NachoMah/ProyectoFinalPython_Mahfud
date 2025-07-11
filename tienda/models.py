@@ -7,6 +7,9 @@ class Publicacion(models.Model):
     contenido = RichTextField()
     imagen = models.ImageField(upload_to='publicaciones/')
     fecha = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.titulo
 
 #Modelos tercer entregable
 
