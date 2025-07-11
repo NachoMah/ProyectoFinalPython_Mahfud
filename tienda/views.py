@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario
-from .models import Producto
+from .models import Producto, Publicacion
+
+def listar_publicaciones(request):
+    publicaciones = Publicacion.objects.all().order_by('-fecha')
+    return render(request, 'tienda/publicaciones.html', {'publicaciones': publicaciones})
+    
+
+#Vistas tercer entregable:
 
 def inicio(request):
     return render(request,'tienda/inicio.html')
