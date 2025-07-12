@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm
+from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm, EditarPerfilForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .models import Producto, Publicacion
+from .models import Producto, Publicacion, Perfil
 
 def listar_publicaciones(request):
     publicaciones = Publicacion.objects.all().order_by('-fecha')
@@ -19,8 +19,10 @@ def registro_usuario(request):
         form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Lo loguea automáticamente
+            login(request, user)
             return redirect('inicio')
+        else:
+            messages.error(request, "Hubo un error en el formulario. Revisá los datos.")
     else:
         form = RegistroUsuarioForm()
     return render(request, 'tienda/registro.html', {'form': form})
@@ -45,8 +47,22 @@ def logout_view(request):
     return redirect('inicio')
 
 @login_required
-def perfil_view(request):
-    return render(request, 'tienda/perfil.html')
+def ver_perfil(request):
+    perfil = request.user.perfil
+    return render(request, 'tienda/perfil.html', {'perfil': perfil})
+
+@login_required
+def editar_perfil(request):
+    perfil = request.user.perfil
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, request.FILES, instance=perfil, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Perfil actualizado correctamente.')
+            return redirect('ver_perfil')
+    else:
+        form = EditarPerfilForm(instance=perfil, user=request.user)
+    return render(request, 'tienda/editar_perfil.html', {'form': form})
 
 #Vistas tercer entregable:
 

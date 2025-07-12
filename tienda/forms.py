@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cliente, Producto, Empleado
+from .models import Cliente, Producto, Empleado, Perfil
 
 class RegistroUsuarioForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -9,6 +9,36 @@ class RegistroUsuarioForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        
+class EditarPerfilForm(forms.ModelForm):
+    first_name = forms.CharField(label="Nombre", required=False)
+    last_name = forms.CharField(label="Apellido", required=False)
+    email = forms.EmailField(label="Email", required=True)
+
+    class Meta:
+        model = Perfil
+        fields = ['avatar', 'bio', 'fecha_nacimiento']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')  # recibimos el usuario
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].initial = user.first_name
+        self.fields['last_name'].initial = user.last_name
+        self.fields['email'].initial = user.email
+        self.user = user
+
+    def save(self, commit=True):
+        perfil = super().save(commit=False)
+        self.user.first_name = self.cleaned_data['first_name']
+        self.user.last_name = self.cleaned_data['last_name']
+        self.user.email = self.cleaned_data['email']
+        if commit:
+            self.user.save()
+            perfil.user = self.user
+            perfil.save()
+        return perfil
+        
+
 
 
 #Forms tercer entregable

@@ -1,10 +1,21 @@
 {% extends 'tienda/padre.html' %}
-{% block title %}Perfil{% endblock %}
+{% block title %}Mi Perfil{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Perfil de {{ request.user.username }}</h2>
-    <p>Email: {{ request.user.email }}</p>
-    <!-- Aquí luego agregarás formulario para editar perfil -->
+    <h2>Mi Perfil</h2>
+
+    {% if perfil.avatar %}
+        <img src="{{ perfil.avatar.url }}" width="100" class="img-thumbnail">
+    {% endif %}
+
+    <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Biografía:</strong> {{ perfil.bio }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ perfil.fecha_nacimiento }}</p>
+
+    <a href="{% url 'editar_perfil' %}" class="btn btn-warning">Editar Perfil</a>
+    <a href="{% url 'password_change' %}" class="btn btn-secondary">Cambiar contraseña</a>
 </div>
 {% endblock %}
