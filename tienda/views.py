@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm, EditarPerfilForm
+from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm, EditarPerfilForm, ContactoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -63,6 +63,17 @@ def editar_perfil(request):
     else:
         form = EditarPerfilForm(instance=perfil, user=request.user)
     return render(request, 'tienda/editar_perfil.html', {'form': form})
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Podrías guardar o procesar los datos, pero en este caso no es necesario
+            messages.success(request, "Gracias por tu mensaje. ¡Te responderemos pronto!")
+            return redirect('contacto')
+    else:
+        form = ContactoForm()
+    return render(request, 'tienda/contacto.html', {'form': form})
 
 #Vistas tercer entregable:
 
