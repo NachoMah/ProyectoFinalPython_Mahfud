@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import inicio, crear_cliente, crear_producto, crear_empleado, buscar_producto, listar_publicaciones, detalle_publicacion, registro_usuario, login_view, logout_view, ver_perfil, editar_perfil, contacto
+from .views import inicio, crear_cliente, crear_producto, crear_empleado, buscar_producto, listar_publicaciones, detalle_publicacion, registro_usuario, login_view, logout_view, ver_perfil, editar_perfil, contacto, about
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -20,4 +20,5 @@ urlpatterns = [
     path('perfil/cambiar-password/', auth_views.PasswordChangeView.as_view(template_name='tienda/cambiar_password.html'), name='password_change'),
     path('perfil/password-ok/', auth_views.PasswordChangeDoneView.as_view(template_name='tienda/password_ok.html'), name='password_change_done'),
     path('contacto/', contacto, name='contacto'),
+    path('about/', about, name='about'),
     ]

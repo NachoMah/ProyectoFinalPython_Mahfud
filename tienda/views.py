@@ -68,12 +68,14 @@ def contacto(request):
     if request.method == 'POST':
         form = ContactoForm(request.POST)
         if form.is_valid():
-            # Podrías guardar o procesar los datos, pero en este caso no es necesario
             messages.success(request, "Gracias por tu mensaje. ¡Te responderemos pronto!")
             return redirect('contacto')
     else:
         form = ContactoForm()
     return render(request, 'tienda/contacto.html', {'form': form})
+
+def about(request):
+    return render(request, 'tienda/about.html')
 
 #Vistas tercer entregable:
 
