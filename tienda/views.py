@@ -5,10 +5,21 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Producto, Publicacion, Perfil
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+class PublicacionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Publicacion
+    template_name = 'tienda/editar_publicacion.html'
+    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+    success_url = reverse_lazy('listar_publicaciones')
+
+class PublicacionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Publicacion
+    template_name = 'tienda/eliminar_publicacion.html'
+    success_url = reverse_lazy('listar_publicaciones')
 
 class PublicacionListView(ListView):
     model = Publicacion

@@ -1,0 +1,14 @@
+{% extends 'tienda/padre.html' %}
+{% block title %}Eliminar Publicación{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>¿Estás seguro de que querés eliminar esta publicación?</h2>
+    <p><strong>{{ object.titulo }}</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'listar_publicaciones' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

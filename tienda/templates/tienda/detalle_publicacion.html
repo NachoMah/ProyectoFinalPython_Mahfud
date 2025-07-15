@@ -1,15 +1,17 @@
 {% extends 'tienda/padre.html' %}
-
 {% block title %}{{ publicacion.titulo }}{% endblock %}
-
 {% block content %}
 <div class="container mt-5">
     <h2>{{ publicacion.titulo }}</h2>
-    <p class="text-muted">{{ publicacion.fecha_publicacion }}</p>
+    <p class="text-muted">{{ publicacion.fecha }}</p>
     <img src="{{ publicacion.imagen.url }}" class="img-fluid mb-4" alt="{{ publicacion.titulo }}">
     <div>
         {{ publicacion.contenido|safe }}
     </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'editar_publicacion' publicacion.pk %}" class="btn btn-warning mt-4 me-2">Editar</a>
+        <a href="{% url 'eliminar_publicacion' publicacion.pk %}" class="btn btn-danger mt-4 me-2">Eliminar</a>
+    {% endif %}
     <a href="{% url 'listar_publicaciones' %}" class="btn btn-secondary mt-4">Volver a publicaciones</a>
 </div>
 {% endblock %}
