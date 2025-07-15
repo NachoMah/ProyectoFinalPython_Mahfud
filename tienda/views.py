@@ -26,7 +26,7 @@ class PublicacionListView(ListView):
     template_name = 'tienda/publicaciones.html'
     context_object_name = 'publicaciones'
     ordering = ['-fecha']
-    
+
 class PublicacionCreateView(LoginRequiredMixin, CreateView):
     model = Publicacion
     form_class = PublicacionForm
@@ -100,17 +100,18 @@ def contacto(request):
 def about(request):
     return render(request, 'tienda/about.html')
 
-#Vistas tercer entregable:
-
 def inicio(request):
-    return render(request,'tienda/inicio.html')
+    return render(request, 'tienda/inicio.html')
+
+def vista_registros(request):
+    return render(request, 'tienda/registros.html')
 
 def crear_cliente(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('inicio')  
+            return redirect('vista_registros')
     else:
         form = ClienteForm()
     return render(request, 'tienda/cliente.html', {'form': form})
@@ -120,18 +121,17 @@ def crear_producto(request):
         form = ProductoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('inicio')  
+            return redirect('vista_registros')
     else:
         form = ProductoForm()
     return render(request, 'tienda/producto.html', {'form': form})
-
 
 def crear_empleado(request):
     if request.method == 'POST':
         form = EmpleadoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('inicio') 
+            return redirect('vista_registros')
     else:
         form = EmpleadoForm()
     return render(request, 'tienda/empleado.html', {'form': form})
@@ -139,19 +139,23 @@ def crear_empleado(request):
 def buscar_producto(request):
     form = BuscarProductoFormulario()
     resultados = []
-    busqueda_realizada = False           
+    busqueda_realizada = False
     if request.method == "GET" and "nombre" in request.GET:
         form = BuscarProductoFormulario(request.GET)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             resultados = Producto.objects.filter(nombre__icontains=nombre)
-            busqueda_realizada = True    
+            busqueda_realizada = True
     return render(
         request,
         'tienda/buscar_producto.html',
         {
             'form': form,
             'resultados': resultados,
-            'busqueda_realizada': busqueda_realizada,  
+            'busqueda_realizada': busqueda_realizada,
         },
     )
+    
+@login_required
+def registros(request):
+    return render(request, 'tienda/registros.html')
