@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import inicio, crear_cliente, crear_producto, crear_empleado, buscar_producto, listar_publicaciones, detalle_publicacion, registro_usuario, login_view, logout_view, ver_perfil, editar_perfil, contacto, about
+from .views import inicio, crear_cliente, crear_producto, crear_empleado, buscar_producto, detalle_publicacion, registro_usuario, login_view, logout_view, ver_perfil, editar_perfil, contacto, about, PublicacionListView, PublicacionCreateView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -10,7 +10,8 @@ urlpatterns = [
     path('buscar_producto/', buscar_producto, name='buscar_producto'),
     #Urls proyecto final
     
-    path('pages/', listar_publicaciones, name='listar_publicaciones'),
+    path('pages/', PublicacionListView.as_view(), name='listar_publicaciones'),
+    path('pages/crear/', PublicacionCreateView.as_view(), name='crear_publicacion'),
     path('publicaciones/<int:pk>/', detalle_publicacion, name='detalle_publicacion'), 
     path('registro/', registro_usuario, name='registro'),
     path('login/', login_view, name='login'),

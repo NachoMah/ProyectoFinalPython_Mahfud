@@ -1,14 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm, EditarPerfilForm, ContactoForm
+from .forms import ClienteForm, ProductoForm, EmpleadoForm, Producto, BuscarProductoFormulario, RegistroUsuarioForm, EditarPerfilForm, ContactoForm, PublicacionForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView
 from .models import Producto, Publicacion, Perfil
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-def listar_publicaciones(request):
-    publicaciones = Publicacion.objects.all().order_by('-fecha')
-    return render(request, 'tienda/publicaciones.html', {'publicaciones': publicaciones})
+class PublicacionListView(ListView):
+    model = Publicacion
+    template_name = 'tienda/publicaciones.html'
+    context_object_name = 'publicaciones'
+    ordering = ['-fecha']
+    
+class PublicacionCreateView(LoginRequiredMixin, CreateView):
+    model = Publicacion
+    form_class = PublicacionForm
+    template_name = 'tienda/crear_publicacion.html'
+    success_url = reverse_lazy('listar_publicaciones')
 
 def detalle_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cliente, Producto, Empleado, Perfil
+from .models import Cliente, Producto, Empleado, Perfil, Publicacion
+
 
 class RegistroUsuarioForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -44,8 +45,11 @@ class ContactoForm(forms.Form):
     asunto = forms.CharField(label='Asunto', max_length=150)
     mensaje = forms.CharField(label='Mensaje', widget=forms.Textarea)
 
-
-
+class PublicacionForm(forms.ModelForm):
+    class Meta:
+        model = Publicacion
+        fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+        
 #Forms tercer entregable
 
 class ClienteForm(forms.ModelForm):
