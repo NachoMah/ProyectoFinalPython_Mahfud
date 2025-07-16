@@ -4,16 +4,16 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-
 <div class="container mt-5 text-center">
     <h1 class="mb-4">Bienvenido a <span class="text-primary">TechShop</span></h1>
-    <p class="lead">¡Gracias por visitar nuestro sitio!</p>
+    <p class="lead">¡Gracias por visitar nuestra tienda!</p>
     <img src="{% static 'images/tech_banner.jpg' %}" class="img-fluid w-100 mb-4" alt="Imagen de bienvenida">
-    
-    <div class="d-grid gap-3 col-6 mx-auto mt-4">
-        <a href="{% url 'buscar_producto' %}" class="btn btn-outline-info btn-lg">Buscar Producto</a>
-        <a href="{% url 'listar_publicaciones' %}" class="btn btn-primary btn-lg">Ver Publicaciones</a>
-    </div>
-</div>
 
+    <p class="lead">
+        TechShop es tu espacio para gestionar productos, empleados y clientes, así como para publicar novedades o consultar los productos registrados.
+    </p>
+    <p class="lead">
+        Desde el menú de navegación podés acceder a las secciones principales como publicaciones, contacto, perfil y más.
+    </p>
+</div>
 {% endblock %}
