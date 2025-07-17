@@ -1,0 +1,30 @@
+{% extends 'tienda/padre.html' %}
+{% load static %}  
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Acerca de mí</h2>
+
+    <p>
+        ¡Hola! Mi nombre es Ignacio Mahfud y soy estudiante de Gestión de Tecnologías de la Información. Actualmente me encuentro desarrollando mis habilidades en desarrollo web con tecnologías como Python, Django, HTML y CSS.
+    </p>
+
+    <img src="{% static 'images/foto_ignacio.jpg' %}" alt="Foto de Ignacio" class="rounded-circle mx-auto d-block mb-4" width="300">
+
+    <p>
+        Me gusta aprender creando proyectos prácticos, donde puedo aplicar lo que estudio y experimentar con nuevas ideas. Este sitio es parte de ese proceso, y representa uno de los proyectos que he construido como parte de mi formación.
+    </p>
+    <p>
+        Tengo interés en seguir creciendo en este ámbito, y me entusiasma la idea de poder trabajar en proyectos cada vez más completos y profesionales.
+    </p>
+
+     
+    <div class="text-center mt-4">
+        <a href="https://www.linkedin.com/in/ignacioagust%C3%ADnmahfud/" target="_blank" class="btn btn-outline-primary">
+            Ver mi perfil en LinkedIn
+        </a>
+    </div>
+    
+</div>
+{% endblock %}

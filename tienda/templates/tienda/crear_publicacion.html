@@ -1,0 +1,14 @@
+{% extends 'tienda/padre.html' %}
+{% block title %}Crear Publicación{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Crear nueva publicación</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Publicar</button>
+    </form>
+</div>
+{% endblock %}

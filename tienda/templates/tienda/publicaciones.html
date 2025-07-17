@@ -1,0 +1,36 @@
+{% extends 'tienda/padre.html' %}
+{% block title %}Publicaciones{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Publicaciones</h2>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'crear_publicacion' %}" class="btn btn-success mb-4">Crear publicación</a>
+    {% endif %}
+
+
+    {% if publicaciones %}
+        <div class="row">
+            {% for publicacion in publicaciones %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <img src="{{ publicacion.imagen.url }}" class="card-img-top" alt="{{ publicacion.titulo }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ publicacion.titulo }}</h5>
+                            <p class="card-text">{{ publicacion.subtitulo }}</p>
+                            <!-- Aquí agregamos el enlace correcto -->
+                            <a href="{% url 'detalle_publicacion' publicacion.pk %}" class="btn btn-primary">Leer más</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ publicacion.fecha }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay publicaciones aún.</p>
+    {% endif %}
+</div>
+{% endblock %}
