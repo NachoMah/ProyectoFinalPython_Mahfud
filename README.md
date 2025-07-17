@@ -91,3 +91,6 @@ El archivo db.sqlite3 (base de datos), la carpeta media/ (archivos subidos por u
 - Bootstrap 5
 - CKEditor para contenido enriquecido
 - SQLite3 (Base de datos)
+
+## Video:
+https://drive.google.com/drive/folders/1wj-kabzpXc5Q6usE42KjlG-MTeQhR-BE?usp=sharing
