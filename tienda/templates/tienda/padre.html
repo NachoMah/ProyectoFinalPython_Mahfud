@@ -20,14 +20,27 @@
             <a class="navbar-brand" href="{% url 'inicio' %}">Mi Tienda</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'registros' %}">Registros</a></li>
+                    {% if request.user.is_superuser %}
+                        <li><a class="nav-link" href="{% url 'registros' %}">Registros</a></li>
+                    {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'buscar_producto' %}">Buscar Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'listar_publicaciones' %}">Publicaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca de mí</a></li>
                 </ul>
+
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
+                        <!-- Saludo y avatar -->
+                        <li class="nav-item d-flex align-items-center me-3">
+                            <span class="me-2">Hola, {{ user.username }}!</span>
+                            {% if user.perfil.avatar %}
+                                <img src="{{ user.perfil.avatar.url }}" alt="Avatar" class="rounded-circle" width="40" height="40">
+                            {% else %}
+                                <img src="{% static 'images/default_avatar.png' %}" alt="Avatar por defecto" class="rounded-circle" width="40" height="40">
+                            {% endif %}
+                        </li>
+                        <!-- Perfil y Logout -->
                         <li class="nav-item"><a class="nav-link" href="{% url 'ver_perfil' %}">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
                     {% else %}

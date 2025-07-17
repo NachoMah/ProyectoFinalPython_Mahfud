@@ -1,10 +1,17 @@
 {% extends 'tienda/padre.html' %}
 
+{% block title %}Acceso Denegado{% endblock %}
+
 {% block content %}
-  <div class="container mt-5 text-center">
-    <h2>Acceso Denegado</h2>
-    <p>No tenés permisos para acceder a esta sección.</p>
-    <p>Solo un usuario con mayor rango puede acceder a este sitio</p>
-    <a href="{% url 'inicio' %}" class="btn btn-primary mt-3">Volver al inicio</a>
-  </div>
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body text-center">
+            <h2 class="card-title text-danger">⛔ Acceso Denegado</h2>
+            <p class="card-text mt-3">
+                Lo sentimos, pero no tenés permisos para acceder a esta sección del sitio.
+            </p>
+            <a href="{% url 'inicio' %}" class="btn btn-outline-primary mt-3">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
