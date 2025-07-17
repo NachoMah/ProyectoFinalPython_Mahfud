@@ -1,0 +1,10 @@
+{% extends 'tienda/padre.html' %}
+
+{% block content %}
+  <div class="container mt-5 text-center">
+    <h2>Acceso Denegado</h2>
+    <p>No tenés permisos para acceder a esta sección.</p>
+    <p>Solo un usuario con mayor rango puede acceder a este sitio</p>
+    <a href="{% url 'inicio' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+  </div>
+{% endblock %}

@@ -4,16 +4,26 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<div class="container mt-5 text-center">
-    <h1 class="mb-4">Bienvenido a <span class="text-primary">TechShop</span></h1>
-    <p class="lead">¡Gracias por visitar nuestra tienda!</p>
-    <img src="{% static 'images/tech_banner.jpg' %}" class="img-fluid w-100 mb-4" alt="Imagen de bienvenida">
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Bienvenido a <span class="text-primary">TechShop</span></h1>
+        <p class="lead">¡Gracias por visitar nuestra tienda tecnológica!</p>
+    </div>
 
-    <p class="lead">
-        TechShop es tu espacio para gestionar productos, empleados y clientes, así como para publicar novedades o consultar los productos registrados.
-    </p>
-    <p class="lead">
-        Desde el menú de navegación podés acceder a las secciones principales como publicaciones, contacto, perfil y más.
-    </p>
+    <div class="card shadow-sm mb-4">
+        <img src="{% static 'images/tech_banner.jpg' %}" class="card-img-top" alt="Imagen de bienvenida">
+        <div class="card-body">
+            <p class="card-text lead text-center">
+                <strong>TechShop</strong> es tu espacio para gestionar productos, empleados y clientes,
+                así como para publicar novedades o consultar los productos registrados.
+            </p>
+            <p class="card-text lead text-center">
+                Desde el menú de navegación podés acceder a las secciones principales como <em>publicaciones</em>, <em>contacto</em>, <em>perfil</em> y más.
+            </p>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'buscar_producto' %}" class="btn btn-primary btn-lg">Buscar productos</a>
+    </div>
 </div>
 {% endblock %}

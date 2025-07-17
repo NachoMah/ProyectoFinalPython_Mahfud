@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Producto, Publicacion, Perfil
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
 
 class PublicacionUpdateView(LoginRequiredMixin, UpdateView):
     model = Publicacion
@@ -158,4 +159,7 @@ def buscar_producto(request):
     
 @login_required
 def registros(request):
+    if not request.user.is_superuser:
+        return render(request, 'tienda/acceso_denegado.html')
+    
     return render(request, 'tienda/registros.html')
