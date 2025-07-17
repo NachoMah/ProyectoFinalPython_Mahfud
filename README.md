@@ -90,4 +90,4 @@ El archivo db.sqlite3 (base de datos), la carpeta media/ (archivos subidos por u
 - Django 4.0+
 - Bootstrap 5
 - CKEditor para contenido enriquecido
-- SQLite3 
+- SQLite3 (Base de datos)
